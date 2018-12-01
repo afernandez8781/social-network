@@ -11,12 +11,11 @@ class UsersCanCreateStatusesTest extends DuskTestCase
 {
     use DatabaseMigrations;
     /**
-     * A Dusk test example.
      *
-     * @test
+     * @test void
      * @throws \Throwable
      */
-    public function users_can_create_statuses()
+    public function user_can_create_statuses()
     {
         $user = factory(User::class)->create();
 
@@ -25,8 +24,9 @@ class UsersCanCreateStatusesTest extends DuskTestCase
                     ->visit('/')
                     ->type('body', 'Mi primer status')
                     ->press('#create-status')
-                    ->screenshot('create-status')
-                    ->assertSee('Mi primer status');
+                    ->waitForText('Mi primer status')
+                    ->assertSee('Mi primer status')
+                    ->assertSee($user->name);
         });
     }
 }
