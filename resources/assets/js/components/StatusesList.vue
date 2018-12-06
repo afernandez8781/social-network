@@ -6,11 +6,12 @@
 					<img class="rounded-circle mr-3 shadow-sm" width="40px" src="https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4">
 					<div>
 						<h5 class="mb-1" v-text="status.user_name"></h5>
-						<!-- <div class="small text-muted" v-text="status.created_at"></div> -->
 						<div class="small text-muted" v-text="status.ago"></div>
 					</div>
 				</div>
 				<p class="card-text text-secondary" v-text="status.body"></p>
+				<button v-if="status.is_liked">TE GUSTA</button>
+				<button v-else dusk="like-btn" @click="like(status)">ME GUSTA</button>
 			</div>
 		</div>
 	</div>
@@ -34,6 +35,14 @@
 			EventBus.$on('status-created', status => {
 				this.statuses.unshift(status);
 			})
+		},
+		methods: {
+			like(status){
+				axios.post(`/statuses/${status.id}/likes`)
+					.then(res => {
+						status.is_liked = true;
+					})
+			}
 		}
 	}
 </script>
