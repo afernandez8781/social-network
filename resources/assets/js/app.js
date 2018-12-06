@@ -19,6 +19,10 @@ window.EventBus = new Vue();
 Vue.component('status-form', require('./components/StatusForm'));
 Vue.component('statuses-list', require('./components/StatusesList'));
 
+import auth from './mixins/auth';
+
+Vue.mixin(auth);
+
 const app = new Vue({
     el: '#app'
 });
