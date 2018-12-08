@@ -47996,7 +47996,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48067,6 +48067,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		like: function like(status) {
+
 			axios.post('/statuses/' + status.id + '/likes').then(function (res) {
 				status.is_liked = true;
 			});
@@ -48090,72 +48091,79 @@ var render = function() {
   return _c(
     "div",
     _vm._l(_vm.statuses, function(status) {
-      return _c("div", { staticClass: "card border-0 mb-3 shadow-sm" }, [
-        _c("div", { staticClass: "card-body d-flex flex-column" }, [
-          _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
-            _c("img", {
-              staticClass: "rounded-circle mr-3 shadow-sm",
-              attrs: {
-                width: "40px",
-                src:
-                  "https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", [
-              _c("h5", {
-                staticClass: "mb-1",
-                domProps: { textContent: _vm._s(status.user_name) }
+      return _c(
+        "div",
+        {
+          staticClass: "card border-0 mb-3 shadow-sm",
+          on: { click: _vm.redirectIfGuest }
+        },
+        [
+          _c("div", { staticClass: "card-body d-flex flex-column" }, [
+            _c("div", { staticClass: "d-flex align-items-center mb-3" }, [
+              _c("img", {
+                staticClass: "rounded-circle mr-3 shadow-sm",
+                attrs: {
+                  width: "40px",
+                  src:
+                    "https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4"
+                }
               }),
               _vm._v(" "),
-              _c("div", {
-                staticClass: "small text-muted",
-                domProps: { textContent: _vm._s(status.ago) }
-              })
-            ])
+              _c("div", [
+                _c("h5", {
+                  staticClass: "mb-1",
+                  domProps: { textContent: _vm._s(status.user_name) }
+                }),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "small text-muted",
+                  domProps: { textContent: _vm._s(status.ago) }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", {
+              staticClass: "card-text text-secondary",
+              domProps: { textContent: _vm._s(status.body) }
+            })
           ]),
           _vm._v(" "),
-          _c("p", {
-            staticClass: "card-text text-secondary",
-            domProps: { textContent: _vm._s(status.body) }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer p-2" }, [
-          status.is_liked
-            ? _c(
-                "button",
-                {
-                  staticClass: "btn btn-link btn-sm",
-                  attrs: { dusk: "unlike-btn" },
-                  on: {
-                    click: function($event) {
-                      _vm.unlike(status)
+          _c("div", { staticClass: "card-footer p-2" }, [
+            status.is_liked
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link btn-sm",
+                    attrs: { dusk: "unlike-btn" },
+                    on: {
+                      click: function($event) {
+                        _vm.unlike(status)
+                      }
                     }
-                  }
-                },
-                [_vm._m(0, true)]
-              )
-            : _c(
-                "button",
-                {
-                  staticClass: "btn btn-link btn-sm",
-                  attrs: { dusk: "like-btn" },
-                  on: {
-                    click: function($event) {
-                      _vm.like(status)
+                  },
+                  [_vm._m(0, true)]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-link btn-sm",
+                    attrs: { dusk: "like-btn" },
+                    on: {
+                      click: function($event) {
+                        _vm.like(status)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "far fa-thumbs-up text-primary mr-1"
-                  }),
-                  _vm._v("\n\t\t\t\tME GUSTA\n\t\t\t")
-                ]
-              )
-        ])
-      ])
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "far fa-thumbs-up text-primary mr-1"
+                    }),
+                    _vm._v("\n\t\t\t\tME GUSTA\n\t\t\t")
+                  ]
+                )
+          ])
+        ]
+      )
     })
   )
 }
@@ -48195,6 +48203,13 @@ module.exports = {
 		},
 		guest: function guest() {
 			return !this.isAuthenticated;
+		}
+	},
+	methods: {
+		redirectIfGuest: function redirectIfGuest() {
+			if (this.guest) {
+				return window.location.href = '/login';
+			}
 		}
 	}
 };

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="card border-0 mb-3 shadow-sm" v-for="status in statuses">
+		<div @click="redirectIfGuest" class="card border-0 mb-3 shadow-sm" v-for="status in statuses">
 			<div class="card-body d-flex flex-column">
 				<div class="d-flex align-items-center mb-3">
 					<img class="rounded-circle mr-3 shadow-sm" width="40px" src="https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4">
@@ -57,6 +57,7 @@
 		},
 		methods: {
 			like(status){
+
 				axios.post(`/statuses/${status.id}/likes`)
 					.then(res => {
 						status.is_liked = true;
