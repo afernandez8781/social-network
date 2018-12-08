@@ -20,8 +20,8 @@ class StatusResource extends JsonResource
             'user_name' => $this->user->name,
             'user_avatar' => 'https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4',
             'ago' => $this->created_at->diffForHumans(),
-            'is_liked' => $this->isLiked()
-            // 'created_at' => $this->created_at
+            'is_liked' => $this->isLiked(),
+            'likes_count' => $this->likesCount(),
         ];
     }
 }

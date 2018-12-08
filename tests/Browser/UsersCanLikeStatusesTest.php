@@ -11,11 +11,12 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class UsersCanLikeStatusesTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
     /**
      * @test
-     *@throws \Throwable
+     * @throws \Throwable
      */
-    public function Guest_users_cannot_like_statuses()
+    public function guest_users_cannot_like_statuses()
     {
         $status = factory(Status::class)->create();
 
@@ -24,13 +25,13 @@ class UsersCanLikeStatusesTest extends DuskTestCase
                 ->waitForText($status->body)
                 ->press('@like-btn')
                 ->assertPathIs('/login')
-                ;
+            ;
         });
     }
 
     /**
      * @test
-     *@throws \Throwable
+     * @throws \Throwable
      */
     public function users_can_like_and_unlike_statuses()
     {
@@ -38,17 +39,20 @@ class UsersCanLikeStatusesTest extends DuskTestCase
         $status = factory(Status::class)->create();
 
         $this->browse(function (Browser $browser) use ($user, $status) {
-            $browser->loginAS($user)
+            $browser->loginAs($user)
                 ->visit('/')
                 ->waitForText($status->body)
+                ->assertSeeIn('@likes-count', 0)
                 ->press('@like-btn')
                 ->waitForText('TE GUSTA')
                 ->assertSee('TE GUSTA')
+                ->assertSeeIn('@likes-count', 1)
 
                 ->press('@unlike-btn')
                 ->waitForText('ME GUSTA')
                 ->assertSee('ME GUSTA')
-                ;
+                ->assertSeeIn('@likes-count', 0)
+            ;
         });
     }
 }
