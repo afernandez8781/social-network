@@ -47996,7 +47996,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48007,6 +48007,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -48131,44 +48133,55 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer p-2" }, [
-            status.is_liked
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-link btn-sm",
-                    attrs: { dusk: "unlike-btn" },
-                    on: {
-                      click: function($event) {
-                        _vm.unlike(status)
+          _c(
+            "div",
+            {
+              staticClass:
+                "card-footer p-2 d-flex justify-content-between align-items-center"
+            },
+            [
+              status.is_liked
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-link btn-sm",
+                      attrs: { dusk: "unlike-btn" },
+                      on: {
+                        click: function($event) {
+                          _vm.unlike(status)
+                        }
                       }
-                    }
-                  },
-                  [_vm._m(0, true)]
-                )
-              : _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-link btn-sm",
-                    attrs: { dusk: "like-btn" },
-                    on: {
-                      click: function($event) {
-                        _vm.like(status)
+                    },
+                    [_vm._m(0, true)]
+                  )
+                : _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-link btn-sm",
+                      attrs: { dusk: "like-btn" },
+                      on: {
+                        click: function($event) {
+                          _vm.like(status)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "far fa-thumbs-up text-primary mr-1"
-                    }),
-                    _vm._v("\n\t\t\t\tME GUSTA\n\t\t\t")
-                  ]
-                ),
-            _vm._v(" "),
-            _c("span", { attrs: { dusk: "likes-count" } }, [
-              _vm._v(_vm._s(status.likes_count))
-            ])
-          ])
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "far fa-thumbs-up text-primary mr-1"
+                      }),
+                      _vm._v("\n\t\t\t\tME GUSTA\n\t\t\t")
+                    ]
+                  ),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-secondary mr-2" }, [
+                _c("i", { staticClass: "far fa-thumbs-up" }),
+                _vm._v(" "),
+                _c("span", { attrs: { dusk: "likes-count" } }, [
+                  _vm._v(_vm._s(status.likes_count))
+                ])
+              ])
+            ]
+          )
         ]
       )
     })
