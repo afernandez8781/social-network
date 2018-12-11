@@ -4,6 +4,8 @@ namespace Tests\Unit\Http\Resources;
 
 use App\Http\Resources\StatusResource;
 
+use App\Models\Comment;
+use App\Http\Resources\CommentResource;
 use App\Models\Status;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -16,37 +18,46 @@ class StatusResourceTest extends TestCase
    /** @test */
    public function a_status_resources_must_have_the_necesary_fields()
    {
-   		$status = factory(Status::class)->create();
+		$status = factory(Status::class)->create();
+      factory(Comment::class)->create(['status_id' => $status->id]);
 
-   		$statusResource = StatusResource::make($status)->resolve();
+		$statusResource = StatusResource::make($status)->resolve();
 
-   		$this->assertEquals(
-            $status->id, 
-            $statusResource['id']
-         );
-         $this->assertEquals(
-            $status->body, 
-            $statusResource['body']
-         );
-   		$this->assertEquals(
-   			$status->user->name, 
-   			$statusResource['user_name']
-   		);
-   		$this->assertEquals(
-   			'https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', 
-   			$statusResource['user_avatar']
-   		);
-   		$this->assertEquals(
-   			$status->created_at->diffForHumans(), 
-   			$statusResource['ago']
-   		);
-         $this->assertEquals(
-            false,
-            $statusResource['is_liked']
-         );
-         $this->assertEquals(
-            0,
-            $statusResource['likes_count']
-         );
+		$this->assertEquals(
+         $status->id, 
+         $statusResource['id']
+      );
+      $this->assertEquals(
+         $status->body, 
+         $statusResource['body']
+      );
+		$this->assertEquals(
+			$status->user->name, 
+			$statusResource['user_name']
+		);
+		$this->assertEquals(
+			'https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', 
+			$statusResource['user_avatar']
+		);
+		$this->assertEquals(
+			$status->created_at->diffForHumans(), 
+			$statusResource['ago']
+		);
+      $this->assertEquals(
+         false,
+         $statusResource['is_liked']
+      );
+      $this->assertEquals(
+         0,
+         $statusResource['likes_count']
+      );
+      $this->assertEquals(
+         CommentResource::class,
+         $statusResource['comments']->collects
+      );
+      $this->assertInstanceOf(
+         Comment::class,
+         $statusResource['comments']->first()->resource
+      );
    }
 }
