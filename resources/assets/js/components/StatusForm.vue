@@ -5,14 +5,15 @@
                 <textarea v-model="body"
                     class="form-control border-0 bg-light" 
                     name="body" 
-                    :placeholder="`¿Qué estás pensando ${currentUser.name}?`">
+                    :placeholder="`¿Qué estás pensando ${currentUser.name}?`"
+                    required>
                 </textarea>
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary" 
                         id="create-status"
                 >
-                        <i class="fa fa-paper-plane text-primary mr-1"></i>
+                        <i class="fa fa-paper-plane mr-1"></i>
                         Publicar
                 </button>
             </div>
