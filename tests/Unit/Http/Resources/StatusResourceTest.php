@@ -35,8 +35,12 @@ class StatusResourceTest extends TestCase
 			$status->user->name, 
 			$statusResource['user_name']
 		);
+      $this->assertEquals(
+         $status->user->link(), 
+         $statusResource['user_link']
+      );
 		$this->assertEquals(
-			'https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', 
+			$status->user->avatar(), 
 			$statusResource['user_avatar']
 		);
 		$this->assertEquals(

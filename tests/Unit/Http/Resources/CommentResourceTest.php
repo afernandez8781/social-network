@@ -35,7 +35,12 @@ class CommentResourceTest extends TestCase
       );
 
       $this->assertEquals(
-         'https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', 
+         $comment->user->link(), 
+         $commentResource['user_link']
+      );
+
+      $this->assertEquals(
+         $comment->user->avatar(), 
          $commentResource['user_avatar']
       );
 
