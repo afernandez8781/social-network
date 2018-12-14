@@ -57,6 +57,9 @@
 	}
 </script>
 
-<style scoped>
-	
+<style lang="scss" scoped>
+	.comments-like-btn{
+		font-size: 0.8em;
+		padding-left: 0;
+	}
 </style>
