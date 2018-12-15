@@ -30,6 +30,7 @@ class UserTest extends TestCase
     {
     	$user = factory(User::class)->make();
 
-    	$this->assertEquals('https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', $user->avatar());
+        $this->assertEquals('https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', $user->avatar());
+    	$this->assertEquals('https://avatars0.githubusercontent.com/u/33205904?s=400&u=388b4a2754a037d598d2bec4e42a7da102427768&v=4', $user->avatar);
     }
 }
