@@ -1,9 +1,8 @@
 <template>
 	<button 
-		@click="sendFriendshipRequest"
-		dusk="request-friendship"
+		@click="toggleFriendshipStatus"
 	>
-		{{ textBtn }}
+		{{ getText }}
 	</button>
 </template>
 
@@ -13,22 +12,44 @@
 			recipient: {
 				type: Object,
 				required: true
+			},
+			friendshipStatus: {
+				type: String,
+				required: true
 			}
 		},
 		data(){
 			return {
-				textBtn: 'Solicitar amistad'
+				localFriendshipStatus: this.friendshipStatus
 			}
 		},
 		methods: {
-			sendFriendshipRequest() {
-				axios.post(`friendships/${this.recipient.name}`)
+			toggleFriendshipStatus() {
+				let method = this.getMethod();
+				
+				axios[method](`friendships/${this.recipient.name}`)
 					.then(res => {
-						this.textBtn = 'Solicitud enviada'
+						this.localFriendshipStatus = res.data.friendship_status;
 					})
 					.catch(err => {
 						console.log(err.response.data);
 					})
+			},
+			getMethod(){
+				if(this.localFriendshipStatus === 'pending')
+				{
+					return 'delete'
+				}
+				return 'post';
+			}
+		},
+		computed: {
+			getText() {
+				if(this.localFriendshipStatus === 'pending')
+				{
+					return 'Cancelar solicitud';
+				}
+				return 'Solicitar amistad'
 			}
 		}
 	}
