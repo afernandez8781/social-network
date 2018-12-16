@@ -8,6 +8,10 @@
 					<img src="{{$user->avatar}}" alt="{{ $user->name }}" class="card-img-top">
 					<div class="card-body">
 						<h5 class="card-title">{{ $user->name }}</h5>
+						<friendship-btn 
+							class="btn btn-primary btn-block"
+							:recipient="{{ $user }}"
+						></friendship-btn>
 					</div>
 				</div>
 			</div>
