@@ -19,6 +19,8 @@ window.EventBus = new Vue();
 Vue.component('status-form', require('./components/StatusForm'));
 Vue.component('status-list', require('./components/StatusList'));
 Vue.component('friendship-btn', require('./components/FriendshipBtn'));
+Vue.component('accept-friendship-btn', require('./components/AcceptFriendshipBtn'));
+
 
 import auth from './mixins/auth';
 
