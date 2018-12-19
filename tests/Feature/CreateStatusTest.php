@@ -4,7 +4,10 @@ namespace Tests\Feature;
 
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Status;
+use App\Http\Resources\StatusResource;
+use App\Events\StatusCreated;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateStatusTest extends TestCase
@@ -21,14 +24,17 @@ class CreateStatusTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_create_statuses()
     {
-    	$this->withoutExceptionHandling();
+      Event::fake([StatusCreated::class]);
 
-        // 1. Given => Teniendo un usuario autenticado
        	$user = factory(User::class)->create();
        	$this->actingAs($user);
 
-       	// 2. When => Cuando hace un post request a status
        	$response = $this->postJson(route('statuses.store'), ['body' => 'Mi primer status']);
+
+        Event::assertDispatched(StatusCreated::class, function ($e){
+          return $e->status->id === Status::first()->id
+              && get_class($e->status) === StatusResource::class;
+        });
 
        	$response->assertJson([
        		'data' => ['body' => 'Mi primer status'],
